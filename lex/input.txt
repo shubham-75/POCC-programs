@@ -1,7 +1,5 @@
-if
-int
-abc
-123
-//Comment
-#include
-123abc
++
+-
+*
+/
+<=

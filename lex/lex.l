@@ -2,13 +2,14 @@
 #include <stdio.h>
 %}
 %%
+#.* {printf("Pre-Processor directive");}
 if|else|while|for|do|break|continue|int|double|float|switch|float|char|return   {printf("Keyword");}
 
 [a-z]([a-z]|[0-9])*    {printf("Identifier");}
 
 [0-9]*        {printf("Number");}
 
-#.* {printf("Pre-Processor directive");}
+"+"|"-"|"*"|"/"|"<="|">="|"!="|"=="|"<"|">"|"="    {printf("Operator");}
 
 "//".*" "* {printf("Comment");}
 
