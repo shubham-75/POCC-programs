@@ -1,0 +1,7 @@
+Keyword
+Keyword
+Identifier
+Number
+Comment
+Pre-Processor directive
+Invalid
