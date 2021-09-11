@@ -3,6 +3,7 @@
 %}
 %%
 #.* {printf("Pre-Processor directive");}
+
 if|else|while|for|do|break|continue|int|double|float|switch|float|char|return   {printf("Keyword");}
 
 [a-z]([a-z]|[0-9])*    {printf("Identifier");}
