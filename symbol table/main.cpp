@@ -1,4 +1,3 @@
-#include <iostream>
 #include <bits/stdc++.h>
 #include "second.h"
 using namespace std;
@@ -86,15 +85,17 @@ int main()
                     cout<<"Enter the line number which you want to delete:\n";
                     cin>>lineno;
                     int itr;
+                    bool flag=true;
                     for(itr=0;itr<m[deleteID].size();itr++)
                         {
                             if(m[deleteID][itr].lineno==lineno)
                                {
                                    m[deleteID].erase(m[deleteID].begin()+itr);
+                                   flag = false;
                                    break;
                                } 
                         }
-                    if(itr>=m[deleteID].size())
+                    if(flag)
                      cout << "\nFailed to delete\n\n";   
                 }
     
