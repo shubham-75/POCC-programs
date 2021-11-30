@@ -25,3 +25,5 @@ int main()
     return 0; 
 }
 int yywrap(){}
+
+//The wrap-up subroutine that returns a value of 1 when the end of input occurs
