@@ -5,27 +5,48 @@
 	#include"y.tab.h"
 	#include<math.h>
 %}
-
-alpha [a-zA-Z]
-digit [0-9]
-
 %%
-[ \t]		;
-[ \n]   { yylineno = yylineno + 1;}
-"void"|"char"|"int"|"float"|"double"	                        {return TYPE;}
-"for" 	                                                        {return FOR;}
-"while"	                                                        {return WHILE;}
-"if"	                                                        {return IF;}
-"else"	                                                        {return ELSE;}
-{digit}+                                                        {return NUM;}
-{alpha}({alpha}|{digit})*                                       {return ID;}
-"<="                                                            {return LEQ;}
-">="                                                            {return GEQ;}
-"=="                                                            {return EQ;}
-"!="                                                            {return NEQ;}
-">"	                                                            {return GT;}
-"<"	                                                            {return LT;}
-.                                                               {return yytext[0];}
+"#include"([ ]+)?((<(\\.|[^>])+>)|(\"(\\.|[^"])+\"))					                                    {return HEADER;}
+"#define"[ ]+[a-zA-z_][a-zA-z_0-9]* 																	    {return DEFINE;}
+"auto"|"register"|"static"|"extern"|"typedef"																{return storage_const;}
+"void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsigned"										{return type_const;}	
+"const"|"volatile"																							{return qual_const;}
+"enum"																										{return enum_const;}
+"case"																										{return CASE;}	
+"default"																									{return DEFAULT;}
+"if"																										{return IF;}
+"switch"																									{return SWITCH;}
+"else"																										{return ELSE;}
+"for"																										{return FOR;}
+"do"																										{return DO;}
+"while"																										{return WHILE;}
+"goto"																										{return GOTO;}
+"continue"																									{return CONTINUE;}
+"break"																										{return BREAK;}
+"struct"|"union"																							{return struct_const;}
+"return"																									{return RETURN;}
+"sizeof"																									{return SIZEOF;}
+"||" 																										{return or_const;}
+"&&"																										{return and_const;}
+"..."																										{return param_const;}
+"=="|"!="																									{return eq_const;}
+"<="|">="																									{return rel_const;}
+">>"|"<<"																									{return shift_const;}
+"++"|"--"																									{return inc_const;}
+"->"																										{return point_const;}
+";"|"="|","|"{"|"}"|"("|")"|"["|"]"|"*"|"+"|"-"|"/"|"?"|":"|"&"|"|"|"^"|"!"|"~"|"%"|"<"|">"					{return yytext[0];}
+"*="|"/="|"+="|"%="|">>="|"-="|"<<="|"&="|"^="|"|="															{return PUNC;}
+[0-9]+																									{return int_const;}
+[0-9]+"."[0-9]+																						{return float_const;}	
+"'"."'"																										{return char_const;}
+[a-zA-z_][a-zA-z_0-9]*			 																			{return id;}
+\"(\\.|[^\"])*\"																							{return string;}
+"//"(\\.|[^\n])*[\n]																						;
+[/][*]([^*]|[*]*[^*/])*[*]+[/]                                                                              ;
+[ \t\n]																										;
 %%
 
-int yywrap(){return -1;}
+int yywrap(void)
+{
+    return 1;
+}
